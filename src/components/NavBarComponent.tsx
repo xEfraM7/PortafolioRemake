@@ -1,41 +1,19 @@
-import { useEffect, useState } from "react";
-import { Nav, Navbar, Container } from "react-bootstrap";
-
+import { Container, Nav, Navbar } from "react-bootstrap";
 import logo from "../assets/img/logo.svg";
 import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon3 from "../assets/img/nav-icon3.svg";
 import navIcon4 from "../assets/img/nav-icon4.svg";
 import navIcon5 from "../assets/img/nav-icon5.svg";
+import { useNavbarScroll } from "../hooks/useNavbarScroll"; // Import the hook
 
 export const NavBarComponent = () => {
-  const [activeLink, setActiveLink] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", onScroll);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
-
-  const onUpdateActiveLink = (value:string) => {
-    setActiveLink(value);
-  };
+  const { activeLink, scrolled, onUpdateActiveLink } = useNavbarScroll(); // Using the hook
 
   return (
     <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
       <Container>
         <Navbar.Brand href="#home">
-          <img src={logo} />
+          <img src={logo} alt="Logo" />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav">
@@ -75,16 +53,16 @@ export const NavBarComponent = () => {
           <span className="navbar-text">
             <div className="social-icon">
               <a href="https://www.linkedin.com/in/efrain-cabrera-b25489216/">
-                <img src={navIcon1} alt="" />
+                <img src={navIcon1} alt="LinkedIn" />
               </a>
               <a href="https://www.instagram.com/efrain_lol/">
-                <img src={navIcon3} alt="" />
+                <img src={navIcon3} alt="Instagram" />
               </a>
               <a href="https://twitter.com/xEfraCD">
-                <img src={navIcon4} alt="" />
+                <img src={navIcon4} alt="Twitter" />
               </a>
               <a href="https://github.com/xEfraM7">
-                <img src={navIcon5} alt="" />
+                <img src={navIcon5} alt="GitHub" />
               </a>
             </div>
             <a href="https://www.linkedin.com/in/efrain-cabrera-b25489216/">
